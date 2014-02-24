@@ -2,6 +2,7 @@
 	/**
 	*	Custom function to date Time
 	*	v 1.0.1
+	* 	http://www.php.net/manual/en/class.datetime.php
 	**/
 	class cDateTime extends \DateTime
 	{
@@ -12,7 +13,6 @@
 		*	@return (array) $arrReturnObjects = array with DateTime Objects in date order
 		**/
 		public static function getRangeInDays($getStart=false, $getEnd=false){
-					echo 'cDateTime.php Line 14:<br /><pre>'.print_r($getEnd,true).'</pre>';
 			$dateStart 		= self::getRange_GetValidDateTime($getStart);
 			$dateEnd 		= self::getRange_GetValidDateTime($getEnd);					
 			if($dateStart == $dateEnd) return array($dateStart);
