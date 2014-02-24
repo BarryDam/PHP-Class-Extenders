@@ -41,7 +41,6 @@
 				return false ;
 			}
 		}
-
 		/**
 		*	@return (dateTime object) today
 		**/
