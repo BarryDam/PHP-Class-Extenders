@@ -4,6 +4,7 @@
 	 * 	Contains less common SimipleXMLElement functions 
 	 *	@version 1.0
 	 * 	@author Barry Dam
+	 * 	@see http://www.php.net/manual/en/class.simplexmlelement.php
 	 */
 	class cSimpleXMLElement extends \SimpleXMLElement {
 		/**

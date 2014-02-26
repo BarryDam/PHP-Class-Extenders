@@ -1,9 +1,11 @@
 <?php
 	/**
-	*	Custom function to date Time
-	*	v 1.0.1
-	* 	http://www.php.net/manual/en/class.datetime.php
-	**/
+	 *	Custom DateTime class
+	 * 	Contains less common DateTime functions 
+	 *	@version 1.0.1
+	 * 	@author Barry Dam
+	 *  @see http://www.php.net/manual/en/class.datetime.php
+	 */
 	class cDateTime extends \DateTime
 	{
 		
