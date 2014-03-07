@@ -67,7 +67,7 @@
 		public static function createAndConvertFromAtom($getAtom)
 		{
 			if (! $getAtom) return false;
-			$dateTime = DateTime::createFromFormat(DateTime::ATOM);
+			$dateTime = DateTime::createFromFormat(DateTime::ATOM, $getAtom);
 			$dateTime->setTimeZone(new DateTimeZone(date_default_timezone_get()));
 			return $dateTime;
 		}
