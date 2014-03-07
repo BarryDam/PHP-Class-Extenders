@@ -2,7 +2,7 @@
 	/**
 	 *	Custom DateTime class
 	 * 	Contains less common DateTime functions 
-	 *	@version 1.0.1
+	 *	@version 1.0.2
 	 * 	@author Barry Dam
 	 *  @see http://www.php.net/manual/en/class.datetime.php
 	 */
@@ -43,6 +43,7 @@
 				return false ;
 			}
 		}
+
 		/**
 		*	@return (dateTime object) today
 		**/
@@ -57,5 +58,18 @@
 			$dateTime->setTimestamp($getTimestamp);
 			return $dateTime;
 		}
-	}
+
+		/**
+		 * Create a DateTime object from a Atom Format and convert it to the current time zone
+		 * @param (DateTime::ATOM) exmple 2014-01-26T09:00:00Z
+		 * @return (datetime object) in current time zone (default time zone)
+		 */
+		public static function createAndConvertFromAtom($getAtom)
+		{
+			if (! $getAtom) return false;
+			$dateTime = DateTime::createFromFormat(DateTime::ATOM);
+			$dateTime->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+			return $dateTime;
+		}
+	};
 ?>
