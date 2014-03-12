@@ -27,8 +27,8 @@
 				$arrLocales = array();
 				switch($getLocale) {
 					case 'nl_NL' :
-						$arrLocales['D'] = array('Zo.', 'Ma.', 'Di.', 'Wo.', 'Do.', 'Vrij.', 'Za.') ;
-						$arrLocales['l'] = array('Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag');
+						$arrLocales['D'] = array('', 'Ma.', 'Di.', 'Wo.', 'Do.', 'Vrij.', 'Za.', 'Zo.') ;
+						$arrLocales['l'] = array('', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag');
 						$arrLocales['M'] = array('', 'Jan.', 'Feb.', 'Maart', 'Apr.', 'Mei', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Okt.', 'Nov.', 'Dec.');
 						$arrLocales['F'] = array('', 'Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December');
 						break;
