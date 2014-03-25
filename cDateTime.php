@@ -2,7 +2,7 @@
 	/**
 	 *	Custom DateTime class
 	 * 	Contains less common DateTime functions 
-	 *	@version 1.0.3
+	 *	@version 1.0.4
 	 * 	@author Barry Dam
 	 *  @see http://www.php.net/manual/en/class.datetime.php
 	 */
@@ -101,6 +101,22 @@
 				} else {
 					return false ;
 				}
+			}
+
+			/**
+			 * @param (int) $getIntWeekNr the week number  not se? > this week
+			 * @param (int) $getIntYear the FULL year.. not set?  > default this year
+			 */
+			public static function getRangeByWeekNr($getIntWeekNr = false, $getIntYear = false)
+			{
+				if (! is_numeric($getIntWeekNr)) $getIntWeekNr  = date('W');
+				if (! is_numeric($getIntYear)) $getIntYear = date('Y');
+				$dateTime = new cDateTime();
+				$dateTime->setTime(00, 00);
+				$dateTime->setISOdate($getIntYear, $getIntWeekNr);
+				$datTimeFirstDayOfWeek = clone $dateTime->modify(('Sunday' == $dateTime->format('l')) ? 'Monday last week' : 'Monday this week');
+				$dateTimeLastDayOfWeek = clone $dateTime->modify('Sunday this week');  
+				return self::getRangeInDays($datTimeFirstDayOfWeek, $dateTimeLastDayOfWeek);
 			}
 
 			/**
