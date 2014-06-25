@@ -65,6 +65,49 @@
 				return $strFormattedDatetime;
 			}
 
+
+			public function formatRelativeTime($getLocale = false, $strDefaultFormat = 'd-m-Y H:i')
+			{
+				$arrLocales = array();
+				switch($getLocale) {
+					case 'nl_NL' :
+					case 'nl' :
+						$arrLocales = array(
+							0 => 'Minder dan een minuut geleden',
+							1 => 'Ongeveer een minuut geleden',
+							2 => 'minuten geleden',
+							3 => 'Ongeveer een uur geleden',
+							4 => 'uren geleden'							
+						);
+						break;
+					case 'en_EN' :
+					case 'en' :
+					default:
+						$arrLocales = array(
+							0 => 'Less than a minute ago',
+							1 => 'About a minute ago',
+							2 => 'minutes ago',
+							3 => 'About an hour ago',
+							4 => 'hours ago'
+						);
+						break;
+				}
+				$intTimestamp 	= $this->getTimestamp();
+				$intDelta		= time()-$intTimestamp;
+				if ($intDelta < 60)
+					return $arrLocales[0];
+				elseif ($intDelta > 60 && $intDelta < 120)	
+					return $arrLocales[1];
+				elseif ($intDelta > 120 && $intDelta < (60*60))
+					return strval(round(($intDelta/60),0)).' '.$arrLocales[2];
+				elseif ($intDelta > (60*60) && $intDelta < (120*60))
+					return $arrLocales[3];
+				elseif ($intDelta > (120*60) && $intDelta < (24*60*60))
+					return strval(round(($intDelta/3600),0)).' '.$arrLocales[4];
+				else
+					return $this->format($strDefaultFormat);			
+			}
+
 		/**
 		 * Static functions 
 		 */
