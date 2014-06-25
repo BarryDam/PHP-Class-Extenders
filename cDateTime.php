@@ -66,6 +66,11 @@
 			}
 
 
+			/**
+			 * @param  string $getLocale  @example nl_NL   # not required     
+			 * @param  string  date time format  @example nl_NL
+			 * @return string @example 1 minute ago @example 15 hours ago
+			 */
 			public function formatRelativeTime($getLocale = false, $strDefaultFormat = 'd-m-Y H:i')
 			{
 				$arrLocales = array();
