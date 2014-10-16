@@ -58,9 +58,11 @@
 			$str = strtoupper($this->str);
 			return new cString($str);
 		}
-		public function trim($getCharlist)
+		public function trim($getCharlist = false)
 		{
-			$str = trim($this->str, $getCharlist);
+			$str = ($getCharlist)
+				? trim($this->str, $getCharlist)
+				: trim($this->str) ;
 			return new cString($str);
 		}
 
@@ -101,8 +103,9 @@
 				->replace("/[^a-zA-Z0-9\/_|+ -]/", '', true)
 				->trim('-')
 				->toLowerCase()
-				->replace("/[\/_|+ -]+/", $getDelimiter)
-				->replace(' ', $getDelimiter);
+				->replace("/\s{2,}/", ' ', true) // multiple whitespace to 1 whitespace
+				->replace("/[\/_|+ -]+/", $getDelimiter) // underscores to delemiter
+				->replace(' ', $getDelimiter); // whitespace to delimiter
 			return new cString($str);
 		}
 		/**
@@ -117,7 +120,7 @@
 		public function toURL($getDelimiter = '-')
 		{
 			// turns I'll be back to I-ll-be-back
-			$str = $this->toASCII("'", $getDelimiter);
+			$str = $this->trim()->toASCII("'", $getDelimiter);
 			return new cString($str);
 		}
 		/**
@@ -126,7 +129,7 @@
 		 */
 		public function truncate($getIntLength, $getAppend='&hellip;')
 		{
-			$str = $this;
+			$str = $this->stripTags();
 			if (strlen($str) < $getIntLength) 
 				return $this;
 			$arrWords 	= explode(' ', $str);
