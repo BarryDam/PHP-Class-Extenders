@@ -78,12 +78,18 @@
 		public function replace($getNeedleOrPattern, $getReplace, $boolRegex = false)
 		{
 			$str = $this->str;
-			if ($boolRegex) {
-				$str = preg_replace($getNeedleOrPattern, $getReplace, $str);
-			} else {
-				$str = str_replace($getNeedleOrPattern, $getReplace, $str);
+			if (is_array($getNeedleOrPattern) && count($getNeedleOrPattern)) {
+				$cString = new cString($str);
+				foreach($getNeedleOrPattern as $strNeedleOrPattern)
+					$cString = $cString->replace($strNeedleOrPattern, $getReplace, $boolRegex);
+				return $cString;
+			} else {				
+				$str = ($boolRegex)
+					? preg_replace($getNeedleOrPattern, $getReplace, $str)
+					: str_replace($getNeedleOrPattern, $getReplace, $str);
+				return new cString($str);			
 			}
-			return new cString($str);
+			
 		}
 		/**
 		 * format string to a valid ASCII string
