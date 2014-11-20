@@ -129,6 +129,19 @@
 			$str = $this->trim()->toASCII("'", $getDelimiter);
 			return new cString($str);
 		}
+
+
+		/**
+		 * convert a string sentence to a array with words
+		 * @param  string 	"The Quick Brown Fox"
+		 * @return array 	array('The', 'Quick', 'Brown', 'Fox');
+		 */
+		public function toWordsArray($getString)
+		{
+			return array_unique(preg_split('/[\ \n\,]+/', $getString));
+		}
+
+
 		/**
 		 * truncate a string by length
 		 * if possible > the string is truncated on a whole word
