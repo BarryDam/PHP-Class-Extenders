@@ -3,10 +3,12 @@
 	 * cString contains string functions which are often used
 	 */
 	class cString {
+		// the actual string
 		private $str = false;
 
-		// Magic Methods //
-
+		/*****************
+		 * Magic methods *
+		 *****************/
 		public function __construct($str) 
 		{
 			$this->str = (string) $str;
@@ -16,8 +18,9 @@
 			return $this->str;
 		}
 
-		// existing string methods (mostly needed in Extra added methods)
-
+		/******************************************************************
+		 * Existing string methods (mostly needed in Extra added methods) *
+		 ******************************************************************/
 		public function base64decode()
 		{
 			$str = base64_decode($this->str);
@@ -66,8 +69,34 @@
 			return new cString($str);
 		}
 
-		// Extra added methods
+		/*****************
+		 * Extra methods *
+		 *****************/
 
+		/**
+		 * Decode string
+		 * @return cString Decoded
+		 */
+		public function decode()
+		{
+			$str = $this
+				->base64decode()
+				->rot13()
+				->gzinflate();
+			return new cString($str);
+		}		
+		/**
+		 * Encode string
+		 * @return cString encoded
+		 */
+		public function encode()
+		{
+			$str = $this
+				->gzdeflate()
+				->rot13()
+				->base64encode();
+			return new cString($str);				
+		}
 		/**
 		 * do a replace or preg_replace
 		 * @param  $getNeedleOrPattern Needle or pattern
@@ -129,29 +158,33 @@
 			$str = $this->trim()->toASCII("'", $getDelimiter);
 			return new cString($str);
 		}
-
-
 		/**
 		 * convert a string sentence to a array with words
-		 * @param  string 	"The Quick Brown Fox"
 		 * @return array 	array('The', 'Quick', 'Brown', 'Fox');
 		 */
-		public function toWordsArray($getString)
+		public function toWordsArray()
 		{
-			return array_unique(preg_split('/[\ \n\,]+/', $getString));
+			$arrReturn = array();
+			// split words at whitespace
+			$arr = array_unique(preg_split('/[\ \n\,]+/', $this->str));
+			// create a new cString from every word
+			foreach($arr as $k => $v) 
+				$arrReturn[$k] = new cString($v);
+			return $arrReturn;
 		}
-
-
 		/**
 		 * truncate a string by length
 		 * if possible > the string is truncated on a whole word
+		 * @param 	int 	$getIntLengt maximum string length  
+		 * @param 	string 	$getAppend paste this after truncated word
+		 * @return 	cString truncated when string is longer then $getIntLength
 		 */
 		public function truncate($getIntLength, $getAppend='&hellip;')
 		{
 			$str = $this->stripTags();
 			if (strlen($str) < $getIntLength) 
 				return $this;
-			$arrWords 	= explode(' ', $str);
+			$arrWords 	= $str->toWordsArray();
 			$strNew 	= null;
 			foreach($arrWords as $strWord) {
 				// if first word is longer then $getIntLength
@@ -162,35 +195,17 @@
 				) {
 					return new cString(substr($strWord, 0, $getIntLength).$getAppend);
 				}
-				// cut at last word
+				// truncate at whole word
 				if ((strlen($strNew) + strlen($strWord)) > $getIntLength) {
 					return new cString($strNew.$getAppend);
 				}
 				$strNew .= (($strNew)? ' ' : '' ).$strWord;
 			}
-			// no need to truncate
+			// no truncation needed here
 			return new cString($strNew);
 		}
-		/**
-		 * Encode string
-		 * @return cString encoded
-		 */
-		public function encode()
-		{
-			$str = $this
-				->gzdeflate()
-				->rot13()
-				->base64encode();
-			return new cString($str);				
-		}
-		public function decode()
-		{
-			$str = $this
-				->base64decode()
-				->rot13()
-				->gzinflate();
-			return new cString($str);
-		}
+
+		
 
 	}
 ?>
