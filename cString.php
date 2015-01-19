@@ -184,7 +184,7 @@
 			$str = $this->stripTags();
 			if (strlen($str) < $getIntLength) 
 				return $this;
-			$arrWords 	= $str->toWordsArray();
+			$arrWords 	= explode(' ', $str);
 			$strNew 	= null;
 			foreach($arrWords as $strWord) {
 				// if first word is longer then $getIntLength
