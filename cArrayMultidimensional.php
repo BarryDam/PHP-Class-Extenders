@@ -2,7 +2,7 @@
 	/**
 	 * Not so common convenience methods for a multidimensional array
 	 *
-	 *
+	 * @uses cString.php (https://github.com/VyseExhale/PHP-Class-Extenders)
 	 */
 	class cArrayMultidimensional extends ArrayObject {
 
