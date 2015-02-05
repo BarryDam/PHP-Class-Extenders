@@ -205,6 +205,23 @@
 			return new cString($strNew);
 		}
 
+		/**
+		 * Check if string has phrase / words in it (case insensitive)
+		 * @param  string  $getPhase seachphrase to find
+		 * @return boolean true when found 
+		 */
+		public function hasPhrase($getPhase='')
+		{
+			return (preg_match("/$getPhase/i", $this->str));
+
+
+			// $a = $o->toLowerCase()->replace('/[^a-zA-Z0-9 @]/','', true)->toWordsArray();
+
+			// $oPhrase = new cString($getPhase);
+			// $b = $oPhrase->toLowerCase()->replace('/[^a-zA-Z0-9 @]/','', true)->toWordsArray();
+
+			// return (count(array_intersect($a, $b)) > 0);
+		}
 		
 
 	}
