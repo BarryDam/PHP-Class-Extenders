@@ -181,7 +181,7 @@
 		 */
 		public function truncate($getIntLength, $getAppend='&hellip;')
 		{
-			$str = $this->stripTags();
+			$str = $this->replace('/\<br(\s*)?\/?\>/i', PHP_EOL, true)->stripTags();
 			if (strlen($str) < $getIntLength) 
 				return $this;
 			$arrWords 	= explode(' ', $str);
