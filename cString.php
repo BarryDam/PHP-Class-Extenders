@@ -183,7 +183,7 @@
 		{
 			$str = $this->replace('/\<br(\s*)?\/?\>/i', PHP_EOL, true)->stripTags();
 			if (strlen($str) < $getIntLength) 
-				return $this;
+				return $str;
 			$arrWords 	= explode(' ', $str);
 			$strNew 	= null;
 			foreach($arrWords as $strWord) {
