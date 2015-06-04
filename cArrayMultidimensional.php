@@ -102,9 +102,11 @@
 				SORT_STRING => SORT_STRING,
 				SORT_DESC => SORT_DESC,
 				SORT_ASC => SORT_ASC,
-				SORT_LOCALE_STRING => SORT_LOCALE_STRING,
-				SORT_NATURAL => SORT_NATURAL
+				SORT_LOCALE_STRING => SORT_LOCALE_STRING				
 			);
+			if (version_compare(phpversion(), '5.4.0', '>=')) {
+				$sortflags[SORT_NATURAL] = SORT_NATURAL;
+			}
 			
 			// prepare multisort arguments
 			$args		= array();
