@@ -155,7 +155,7 @@
 		public function toURL($getDelimiter = '-')
 		{
 			// turns I'll be back to I-ll-be-back
-			$str = $this->trim()->toASCII("'", $getDelimiter);
+			$str = str_replace(array('/', '\\'), '', $this->trim()->toASCII("'", $getDelimiter));
 			return new cString($str);
 		}
 		/**
